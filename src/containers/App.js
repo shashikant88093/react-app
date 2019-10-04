@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import Radium,{StyleRoot} from "radium";
-import Person from "../components/persons/Person/Person";
+import Radium, { StyleRoot } from "radium";
+import Persons from "../components/persons/Persons";
 
 class App extends Component {
   state = {
@@ -58,7 +58,7 @@ class App extends Component {
       border: "1px solid red",
       marginBottom: "10px",
       borderRadius: "5px",
-      curser: 'pointer',
+      curser: "pointer",
       ":hover": {
         backgroundColor: "lightgreen",
         color: "black",
@@ -69,17 +69,11 @@ class App extends Component {
     if (this.state.showPerson) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                onchange={event => this.onchange(event, person.id)}
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-              />
-            );
-          })}
+          <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler} 
+          onchanged={this.onchanged}/>
+         
         </div>
       );
       style.background = "red";
@@ -98,13 +92,13 @@ class App extends Component {
     }
     return (
       <StyleRoot>
-      <>
-        <p className={classes.join(" ")}>Hello bhai log</p>
-        <button style={style} onClick={this.ontoggle}>
-          Click Me!
-        </button>
-        {persons}
-      </>
+        <>
+          <p className={classes.join(" ")}>Hello bhai log</p>
+          <button style={style} onClick={this.ontoggle}>
+            Click Me!
+          </button>
+          {persons}
+        </>
       </StyleRoot>
     );
   }
